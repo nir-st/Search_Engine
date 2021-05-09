@@ -9,5 +9,4 @@ pytz
 regex==2020.10.28
 six==1.15.0
 tqdm==4.51.0
-
 gensim~=3.8.3

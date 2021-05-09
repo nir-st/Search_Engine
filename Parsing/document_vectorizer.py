@@ -1,4 +1,4 @@
-from word_to_vec import *
+from Ranking.word_to_vec import *
 import numpy as np
 
 

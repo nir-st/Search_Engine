@@ -1,9 +1,8 @@
 from numpy import dot
 from numpy.linalg import norm
-from document_vectorizer import *
+from Parsing.document_vectorizer import *
 
-# you can change whatever you want in this module, just make sure it doesn't
-# break the searcher module
+
 class Ranker:
     def __init__(self):
         pass

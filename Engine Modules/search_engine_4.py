@@ -1,18 +1,18 @@
 """
--------------------------------------
---- THIS MODULE IS USING WORD2VEC ---
--------------------------------------
+-------------------------------------------------------------
+--- THIS MODULE IS USING WORD2VEC AND SPELLING CORRECTION ---
+-------------------------------------------------------------
 """
 import pandas as pd
-import tf_idf_calculator
-from document_vectorizer import *
-from reader import ReadFile
+from Ranking import tf_idf_calculator
+from Parsing.document_vectorizer import *
+from Parsing.reader import ReadFile
 from configuration import ConfigClass
-from parser_module import Parse
-from indexer import Indexer
-from searcher import Searcher
+from Parsing.parser_module import Parse
+from Parsing.indexer import Indexer
+from Ranking.searcher import Searcher
 import utils
-import gensim
+from Parsing import spell_correction
 
 
 # DO NOT CHANGE THE CLASS NAME
@@ -55,6 +55,7 @@ class SearchEngine:
         self._indexer.total_num_of_docs = number_of_documents
         if self._config.toWeighVectors or self._config.toWeighQuery:
             tf_idf_calculator.calc_docs_terms_tfidf(self._indexer.inverted_idx, self._indexer.document_posting)
+
         if not self._config.toCalcVecsAfterQuery and not self._config.calculateDocumentVectorsWhileIndexing:
             self.document_vectorizer.generate_all_document_vectors(self._indexer.document_posting, self._config.toWeighVectors)
 
@@ -92,4 +93,5 @@ class SearchEngine:
             and the last is the least relevant result.
         """
         searcher = Searcher(self._parser, self._indexer, model=self._model)
-        return searcher.search(query)
+        query_with_corrected_spelling = spell_correction.correct_spelling(query)
+        return searcher.search(query_with_corrected_spelling)

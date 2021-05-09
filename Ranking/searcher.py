@@ -1,4 +1,4 @@
-from document_vectorizer import DocumentVectorizer
+from Parsing.document_vectorizer import DocumentVectorizer
 from ranker import Ranker
 import utils
 import configuration

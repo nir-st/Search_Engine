@@ -4,16 +4,16 @@
 ---------------------------------------------------
 """
 import pandas as pd
-import tf_idf_calculator
-from document_vectorizer import *
-from reader import ReadFile
+from Ranking import tf_idf_calculator
+from Parsing.document_vectorizer import *
+from Parsing.reader import ReadFile
 from configuration import ConfigClass
-from parser_module import Parse
-from indexer import Indexer
-from searcher import Searcher
+from Parsing.parser_module import Parse
+from Parsing.indexer import Indexer
+from Ranking.searcher import Searcher
 import utils
 import gensim
-import thesaurus
+from Parsing import thesaurus
 
 
 # DO NOT CHANGE THE CLASS NAME
